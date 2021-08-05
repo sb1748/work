@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxszj.mapper.sap.SapXsddCqTbMapper" >
+  <resultMap id="BaseResultMap" type="com.jxszj.pojo.sap.SapXsddCqTb" >
+  	<id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="xspz" property="xspz" jdbcType="VARCHAR" />
+    <result column="xspzxm" property="xspzxm" jdbcType="INTEGER" />
+    <result column="wl" property="wl" jdbcType="VARCHAR" />
+    <result column="sl" property="sl" jdbcType="INTEGER" />
+    <result column="khck" property="khck" jdbcType="VARCHAR" />
+    <result column="sdf" property="sdf" jdbcType="VARCHAR" />
+    <result column="wlms" property="wlms" jdbcType="VARCHAR" />
+    <result column="xszz" property="xszz" jdbcType="VARCHAR" />
+    <result column="jjyy" property="jjyy" jdbcType="VARCHAR" />
+    <result column="jhrq" property="jhrq" jdbcType="VARCHAR" />
+    <result column="njhrq" property="njhrq" jdbcType="VARCHAR" />
+    <result column="wlz" property="wlz" jdbcType="VARCHAR" />
+    <result column="ssfz" property="ssfz" jdbcType="VARCHAR" />
+    <result column="cjrq" property="cjrq" jdbcType="VARCHAR" />
+    <result column="xgrq" property="xgrq" jdbcType="VARCHAR" />
+    <result column="tcrq" property="tcrq" jdbcType="VARCHAR" />
+    <result column="yy" property="yy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, xspz, xspzxm, wl, sl, khck, sdf, wlms, xszz, jjyy, jhrq, njhrq, wlz, ssfz, cjrq, xgrq, tcrq, 
+    yy
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jxszj.pojo.sap.SapXsddCqTbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sap_xsdd_cq_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sap_xsdd_cq_tb
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectMaxjhrq" resultMap="BaseResultMap">
+  	SELECT id,xspz,xspzxm,wl,sl,khck,sdf,wlms,xszz, jjyy, MAX(jhrq) AS jhrq,njhrq, wlz, ssfz, xgrq , tcrq, yy FROM sap_xsdd_cq_tb where xspz=#{xspz}
+  </select>
+
+<!--   <select id="selectMaxjhrq" resultMap="BaseResultMap"> -->
+<!--   	SELECT id,xspz,xspzxm,wl,sl,khck,sdf,wlms,xszz, jjyy, MAX(jhrq) AS jhrq,njhrq, wlz, ssfz, xgrq , tcrq, yy FROM sap_xsdd_cq_tb group by xspz -->
+<!--   </select> -->
+  
+  <insert id="insertByBatch" parameterType="java.util.List">
+    insert into sap_xsdd_cq_tb (id,xspz, xspzxm, wl, 
+      sl, khck, sdf, 
+      wlms, xszz, jjyy, jhrq, njhrq, wlz, ssfz, cjrq, xgrq , tcrq, yy)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+    	(#{item.id,jdbcType=VARCHAR},#{item.xspz,jdbcType=VARCHAR}, #{item.xspzxm,jdbcType=INTEGER}, #{item.wl,jdbcType=VARCHAR}, 
+      #{item.sl,jdbcType=INTEGER}, #{item.khck,jdbcType=VARCHAR}, #{item.sdf,jdbcType=VARCHAR}, 
+      #{item.wlms,jdbcType=VARCHAR}, #{item.xszz,jdbcType=VARCHAR}, #{item.jjyy,jdbcType=VARCHAR}, #{item.jhrq,jdbcType=VARCHAR}, #{item.njhrq,jdbcType=VARCHAR},
+      #{item.wlz,jdbcType=VARCHAR}, #{item.ssfz,jdbcType=VARCHAR},#{item.cjrq,jdbcType=VARCHAR}, #{item.xgrq,jdbcType=VARCHAR}, #{item.tcrq,jdbcType=VARCHAR}, #{item.yy,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  
+  <delete id="deleteByExample" parameterType="com.jxszj.pojo.sap.SapXsddCqTbExample" >
+	  delete from sap_xsdd_cq_tb
+	  <if test="_parameter != null" >
+	    <include refid="Example_Where_Clause" />
+	  </if>
+  </delete>
+  
+  <update id="updateByPrimaryKey" parameterType="com.jxszj.pojo.sap.SapXsddCqTb" >
+    update sap_xsdd_cq_tb
+    set id = #{id,jdbcType=VARCHAR},
+      xspz = #{xspz,jdbcType=VARCHAR},
+      xspzxm = #{xspzxm,jdbcType=INTEGER},
+      wl = #{wl,jdbcType=VARCHAR},
+      sl = #{sl,jdbcType=INTEGER},
+      khck = #{khck,jdbcType=VARCHAR},
+      sdf = #{sdf,jdbcType=VARCHAR},
+      wlms = #{wlms,jdbcType=VARCHAR},
+      xszz = #{xszz,jdbcType=VARCHAR},
+      jjyy = #{jjyy,jdbcType=VARCHAR},
+      jhrq = #{jhrq,jdbcType=VARCHAR},
+      njhrq = #{njhrq,jdbcType=VARCHAR},
+      wlz = #{wlz,jdbcType=VARCHAR},
+      ssfz = #{ssfz,jdbcType=VARCHAR},
+      cjrq = #{cjrq,jdbcType=VARCHAR},
+      xgrq = #{xgrq,jdbcType=VARCHAR},
+      tcrq = #{tcrq,jdbcType=VARCHAR},
+      yy = #{yy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateNjhrq" parameterType="com.jxszj.pojo.sap.SapXsddCqTb">
+    update sap_xsdd_cq_tb
+    set njhrq = #{jhrq,jdbcType=VARCHAR}
+    where xspz = #{xspz,jdbcType=VARCHAR}
+  </update>
+  
+  
+<!--   <update id="updateNjhrq" parameterType="java.util.List"> -->
+<!--         <foreach collection="list" item="item" index="index" separator=";"> -->
+<!--             UPDATE sap_xsdd_cq_tb   -->
+<!--             SET njhrq= #{item.jhrq,jdbcType=VARCHAR} -->
+<!--             WHERE xspz = #{item.xspz,jdbcType=VARCHAR} -->
+<!--         </foreach> -->
+<!--     </update> -->
+
+
+	<insert id="createXsddView">
+		CREATE VIEW sap_xsdd_cq_tb_view AS SELECT * FROM sap_xsdd_cq_tb 
+			WHERE jjyy &lt;&gt; '57' AND njhrq&lt;=#{currentDate} AND njhrq&gt;=#{pastDate}
+	</insert>
+	
+	<update id="dropView">
+		DROP VIEW sap_xsdd_cq_tb_view
+	</update>
+	
+	<select id="selectCqXsdd1" resultType= "java.util.Map">
+		SELECT id,xspz,xspzxm,wl,sl,khck,sdf,wlms,jhrq,njhrq,wlz,ssfz,tcrq  FROM  sap_xsdd_cq_tb_view 
+			WHERE (SELECT COUNT(1) AS num FROM sap_wlpzqd_cq_tb_view WHERE sap_wlpzqd_cq_tb_view.id = sap_xsdd_cq_tb_view.id) = 0
+	</select>
+	
+	<select id="selectCqXsdd2" resultType= "java.util.Map">
+		SELECT v1.id,v1.xspz,v1.xspzxm,v1.wl,v1.sl,v1.khck,v1.sdf,v1.wlms,v1.jhrq,v1.njhrq,v1.wlz,v1.ssfz,v1.tcrq FROM sap_xsdd_cq_tb_view v1,sap_wlpzqd_cq_tb_view v2 
+			WHERE v1.id=v2.id  AND v2.sl&lt;v1.sl
+	</select>
+  
+  
+    	<!-- 清除id -->
+	<update id="truncateTable">
+		truncate table sap_xsdd_cq_tb
+	</update>
+</mapper>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxszj.mapper.sap.SapKhqzTbMapper" >
+  <resultMap id="BaseResultMap" type="com.jxszj.pojo.sap.SapKhqzTb" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pzbm" property="pzbm" jdbcType="VARCHAR" />
+    <result column="zz" property="zz" jdbcType="VARCHAR" />
+    <result column="jfkm" property="jfkm" jdbcType="VARCHAR" />
+    <result column="jfzzbs" property="jfzzbs" jdbcType="VARCHAR" />
+    <result column="jfje" property="jfje" jdbcType="VARCHAR" />
+    <result column="gys" property="gys" jdbcType="VARCHAR" />
+    <result column="dfzzbs" property="dfzzbs" jdbcType="VARCHAR" />
+    <result column="dfje" property="dfje" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="msg" property="msg" jdbcType="VARCHAR" />
+    <result column="cjr" property="cjr" jdbcType="VARCHAR" />
+    <result column="jfjzm" property="jfjzm" jdbcType="VARCHAR" />
+    <result column="dfjzm" property="dfjzm" jdbcType="VARCHAR" />
+    <result column="pzrq" property="pzrq" jdbcType="VARCHAR" />
+    <result column="gzrq" property="gzrq" jdbcType="VARCHAR" />
+    <result column="htext" property="htext" jdbcType="VARCHAR" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, pzbm, zz, jfkm, jfzzbs, jfje, gys, dfzzbs, dfje, date, status, msg, cjr, jfjzm, 
+    dfjzm, pzrq, gzrq, htext, text
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jxszj.pojo.sap.SapKhqzTbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sap_khqz_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <insert id="insertByBatch" parameterType="java.util.List">
+    insert into sap_khqz_tb (id, pzbm, zz, 
+      jfkm, jfzzbs, jfje, 
+      gys, dfzzbs, dfje, date, status, 
+      msg, cjr, 
+      jfjzm, dfjzm, pzrq, 
+      gzrq, htext, text)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+    	(#{item.id,jdbcType=INTEGER}, #{item.pzbm,jdbcType=VARCHAR}, #{item.zz,jdbcType=VARCHAR}, 
+      #{item.jfkm,jdbcType=VARCHAR}, #{item.jfzzbs,jdbcType=VARCHAR}, #{item.jfje,jdbcType=VARCHAR}, 
+      #{item.gys,jdbcType=VARCHAR}, #{item.dfzzbs,jdbcType=VARCHAR}, #{item.dfje,jdbcType=VARCHAR}, #{item.date,jdbcType=DATE}, #{item.status,jdbcType=VARCHAR}, 
+      #{item.msg,jdbcType=VARCHAR}, #{item.cjr,jdbcType=VARCHAR}, 
+      #{item.jfjzm,jdbcType=VARCHAR}, #{item.dfjzm,jdbcType=VARCHAR}, #{item.pzrq,jdbcType=VARCHAR}, 
+      #{item.gzrq,jdbcType=VARCHAR}, #{item.htext,jdbcType=VARCHAR}, #{item.text,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.jxszj.pojo.sap.SapKhqzTb" >
+    update sap_khqz_tb
+    set pzbm = #{pzbm,jdbcType=VARCHAR},
+      zz = #{zz,jdbcType=VARCHAR},
+      jfkm = #{jfkm,jdbcType=VARCHAR},
+      jfzzbs = #{jfzzbs,jdbcType=VARCHAR},
+      jfje = #{jfje,jdbcType=VARCHAR},
+      gys = #{gys,jdbcType=VARCHAR},
+      dfzzbs = #{dfzzbs,jdbcType=VARCHAR},
+      dfje = #{dfje,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      status = #{status,jdbcType=VARCHAR},
+      msg = #{msg,jdbcType=VARCHAR},
+      cjr = #{cjr,jdbcType=VARCHAR},
+      jfjzm = #{jfjzm,jdbcType=VARCHAR},
+      dfjzm = #{dfjzm,jdbcType=VARCHAR},
+      pzrq = #{pzrq,jdbcType=VARCHAR},
+      gzrq = #{gzrq,jdbcType=VARCHAR},
+      htext = #{htext,jdbcType=VARCHAR},
+      text = #{text,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <delete id="deleteByExample" parameterType="com.jxszj.pojo.sap.SapKhqzTbExample" >
+    delete from sap_khqz_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxszj.mapper.sap.SapDataTbMapper" >
+  <resultMap id="BaseResultMap" type="com.jxszj.pojo.sap.SapDataTb" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bmz" property="bmz" jdbcType="VARCHAR" />
+    <result column="data" property="data" jdbcType="VARCHAR" />
+    <result column="gzs" property="gzs" jdbcType="VARCHAR" />
+    <result column="wlmclz" property="wlmclz" jdbcType="VARCHAR" />
+    <result column="ggxhlz" property="ggxhlz" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, bmz, data, gzs, wlmclz, ggxhlz
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jxszj.pojo.sap.SapDataTbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sap_data_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jxszj.pojo.sap.SapDataTbExample" >
+    delete from sap_data_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jxszj.pojo.sap.SapDataTb" >
+    insert into sap_data_tb (id, bmz, data, 
+      gzs, wlmclz, ggxhlz
+      )
+    values (#{id,jdbcType=INTEGER}, #{bmz,jdbcType=VARCHAR}, #{data,jdbcType=VARCHAR}, 
+      #{gzs,jdbcType=VARCHAR}, #{wlmclz,jdbcType=VARCHAR}, #{ggxhlz,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jxszj.pojo.sap.SapDataTb" >
+    update sap_data_tb
+    set bmz = #{bmz,jdbcType=VARCHAR},
+      data = #{data,jdbcType=VARCHAR},
+      gzs = #{gzs,jdbcType=VARCHAR},
+      wlmclz = #{wlmclz,jdbcType=VARCHAR},
+      ggxhlz = #{ggxhlz,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

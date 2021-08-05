@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxszj.mapper.sap.SapWlpzqdvoCqTbMapper" >
+  <resultMap id="BaseResultMap" type="com.jxszj.pojo.sap.SapWlpzqdvoCqTb" >
+    <result column="wlpz" property="wlpz" jdbcType="VARCHAR" />
+    <result column="wlpzxm" property="wlpzxm" jdbcType="INTEGER" />
+    <result column="xsdd" property="xsdd" jdbcType="VARCHAR" />
+    <result column="xsddxm" property="xsddxm" jdbcType="INTEGER" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="lrrq" property="lrrq" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    wlpz, wlpzxm, xsdd, xsddxm, year, id, lrrq
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jxszj.pojo.sap.SapWlpzqdvoCqTbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sap_wlpzqdvo_cq_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jxszj.pojo.sap.SapWlpzqdvoCqTbExample" >
+    delete from sap_wlpzqdvo_cq_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  
+  <insert id="insertByBatch" parameterType="java.util.List">
+     insert into sap_wlpzqdvo_cq_tb (wlpz, wlpzxm, xsdd, 
+      xsddxm, year, id, lrrq)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+    	(#{item.wlpz,jdbcType=VARCHAR}, #{item.wlpzxm,jdbcType=INTEGER}, #{item.xsdd,jdbcType=VARCHAR}, 
+      #{item.xsddxm,jdbcType=INTEGER}, #{item.year,jdbcType=VARCHAR}, #{item.id,jdbcType=VARCHAR}, #{item.lrrq,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  
+    	<!-- 清除id -->
+	<update id="truncateTable">
+		truncate table sap_wlpzqdvo_cq_tb
+	</update>
+</mapper>

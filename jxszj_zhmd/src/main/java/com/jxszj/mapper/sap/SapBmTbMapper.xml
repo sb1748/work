@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxszj.mapper.sap.SapBmTbMapper" >
+  <resultMap id="BaseResultMap" type="com.jxszj.pojo.sap.SapBmTb" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="new_name" property="newName" jdbcType="VARCHAR" />
+    <result column="new_wlbm" property="newWlbm" jdbcType="VARCHAR" />
+    <result column="old_name" property="oldName" jdbcType="VARCHAR" />
+    <result column="old_wlbm" property="oldWlbm" jdbcType="VARCHAR" />
+    <result column="bom" property="bom" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, new_name, new_wlbm, old_name, old_wlbm, bom, createTime, status
+  </sql>
+  <select id="selectByExampleGroup" resultMap="BaseResultMap" parameterType="com.jxszj.pojo.sap.SapBmTbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sap_bm_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+     GROUP BY new_wlbm
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jxszj.pojo.sap.SapBmTbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sap_bm_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jxszj.pojo.sap.SapBmTbExample" >
+    delete from sap_bm_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jxszj.pojo.sap.SapBmTb" >
+    insert into sap_bm_tb (id, new_name, new_wlbm, 
+      old_name, old_wlbm, bom, 
+      createTime, status)
+    values (#{id,jdbcType=INTEGER}, #{newName,jdbcType=VARCHAR}, #{newWlbm,jdbcType=VARCHAR}, 
+      #{oldName,jdbcType=VARCHAR}, #{oldWlbm,jdbcType=VARCHAR}, #{bom,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jxszj.pojo.sap.SapBmTb" >
+    update sap_bm_tb
+    set new_name = #{newName,jdbcType=VARCHAR},
+      new_wlbm = #{newWlbm,jdbcType=VARCHAR},
+      old_name = #{oldName,jdbcType=VARCHAR},
+      old_wlbm = #{oldWlbm,jdbcType=VARCHAR},
+      bom = #{bom,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+    <insert id="insertByBatch" parameterType="java.util.List">
+    insert into sap_bm_tb (id, new_name, new_wlbm, 
+      old_name, old_wlbm, bom, createTime, status)
+    values
+    <foreach collection="list" item="sapBm" index="index" separator=",">
+    	(#{sapBm.id,jdbcType=INTEGER}, #{sapBm.newName,jdbcType=VARCHAR}, #{sapBm.newWlbm,jdbcType=VARCHAR}, 
+      #{sapBm.oldName,jdbcType=VARCHAR},#{sapBm.oldWlbm,jdbcType=VARCHAR},#{sapBm.bom,jdbcType=VARCHAR},#{sapBm.createtime,jdbcType=VARCHAR},#{sapBm.status,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  
+  
+   	<update id="updateBatch" parameterType="java.util.List">
+    update sap_bm_tb 
+    set  status=
+    <foreach collection="list" item="item" index="index" 
+        separator=" " open="case ID" close="end">
+        when #{item.id} then #{item.status}
+    </foreach>
+    where id in
+    <foreach collection="list" index="index" item="item" 
+        separator="," open="(" close=")">
+        #{item.id,jdbcType=VARCHAR}
+    </foreach>
+	</update>
+	
+	<delete id="deleteAll" >
+   	 delete from sap_bm_tb
+  	</delete>
+</mapper>

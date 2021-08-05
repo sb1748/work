@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxszj.mapper.sap.SapPriceTbMapper" >
+  <resultMap id="BaseResultMap" type="com.jxszj.pojo.sap.SapPriceTb" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="xszz" property="xszz" jdbcType="VARCHAR" />
+    <result column="fxqd" property="fxqd" jdbcType="VARCHAR" />
+    <result column="tjlx" property="tjlx" jdbcType="VARCHAR" />
+    <result column="khbm" property="khbm" jdbcType="VARCHAR" />
+    <result column="khjgz" property="khjgz" jdbcType="VARCHAR" />
+    <result column="wlbm" property="wlbm" jdbcType="VARCHAR" />
+    <result column="dw" property="dw" jdbcType="VARCHAR" />
+    <result column="bz" property="bz" jdbcType="VARCHAR" />
+    <result column="djzk" property="djzk" jdbcType="VARCHAR" />
+    <result column="djbs" property="djbs" jdbcType="VARCHAR" />
+    <result column="zkbs" property="zkbs" jdbcType="VARCHAR" />
+    <result column="yxksrq" property="yxksrq" jdbcType="VARCHAR" />
+    <result column="yxjsrq" property="yxjsrq" jdbcType="VARCHAR" />
+    <result column="wyj" property="wyj" jdbcType="VARCHAR" />
+    <result column="tbzt" property="tbzt" jdbcType="VARCHAR" />
+    <result column="cjrq" property="cjrq" jdbcType="VARCHAR" />
+    <result column="sxzt" property="sxzt" jdbcType="VARCHAR" />
+    <result column="cjr" property="cjr" jdbcType="VARCHAR" />
+    <result column="wlms" property="wlms" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, xszz, fxqd, tjlx, khbm, khjgz, wlbm, dw, bz, djzk, djbs, zkbs, yxksrq, yxjsrq, 
+    wyj, tbzt, cjrq, sxzt, cjr, wlms
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jxszj.pojo.sap.SapPriceTbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sap_price_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sap_price_tb
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sap_price_tb
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jxszj.pojo.sap.SapPriceTbExample" >
+    delete from sap_price_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jxszj.pojo.sap.SapPriceTb" >
+    insert into sap_price_tb (id, xszz, fxqd, 
+      tjlx, khbm, khjgz, 
+      wlbm, dw, bz, djzk, 
+      djbs, zkbs, yxksrq, 
+      yxjsrq, wyj, tbzt, 
+      cjrq, sxzt, cjr, wlms
+      )
+    values (#{id,jdbcType=VARCHAR}, #{xszz,jdbcType=VARCHAR}, #{fxqd,jdbcType=VARCHAR}, 
+      #{tjlx,jdbcType=VARCHAR}, #{khbm,jdbcType=VARCHAR}, #{khjgz,jdbcType=VARCHAR}, 
+      #{wlbm,jdbcType=VARCHAR}, #{dw,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{djzk,jdbcType=VARCHAR}, 
+      #{djbs,jdbcType=VARCHAR}, #{zkbs,jdbcType=VARCHAR}, #{yxksrq,jdbcType=VARCHAR}, 
+      #{yxjsrq,jdbcType=VARCHAR}, #{wyj,jdbcType=VARCHAR}, #{tbzt,jdbcType=VARCHAR}, 
+      #{cjrq,jdbcType=VARCHAR}, #{sxzt,jdbcType=VARCHAR}, #{cjr,jdbcType=VARCHAR}, #{wlms,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertByBatch" parameterType="java.util.List">
+    insert into sap_price_tb (id, xszz, fxqd, 
+      tjlx, khbm, khjgz, 
+      wlbm, dw, bz, djzk, 
+      djbs, zkbs, yxksrq, 
+      yxjsrq, wyj, tbzt, 
+      cjrq, sxzt, cjr, wlms
+      )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+    	(#{item.id,jdbcType=VARCHAR}, #{item.xszz,jdbcType=VARCHAR}, #{item.fxqd,jdbcType=VARCHAR}, 
+      #{item.tjlx,jdbcType=VARCHAR}, #{item.khbm,jdbcType=VARCHAR}, #{item.khjgz,jdbcType=VARCHAR}, 
+      #{item.wlbm,jdbcType=VARCHAR}, #{item.dw,jdbcType=VARCHAR}, #{item.bz,jdbcType=VARCHAR}, #{item.djzk,jdbcType=VARCHAR}, 
+      #{item.djbs,jdbcType=VARCHAR}, #{item.zkbs,jdbcType=VARCHAR}, #{item.yxksrq,jdbcType=VARCHAR}, 
+      #{item.yxjsrq,jdbcType=VARCHAR}, #{item.wyj,jdbcType=VARCHAR}, #{item.tbzt,jdbcType=VARCHAR}, 
+      #{item.cjrq,jdbcType=VARCHAR}, #{item.sxzt,jdbcType=VARCHAR}, #{item.cjr,jdbcType=VARCHAR}, #{item.wlms,jdbcType=VARCHAR})
+    </foreach>
+    ON DUPLICATE KEY UPDATE
+    xszz = VALUES(xszz),fxqd = VALUES(fxqd),tjlx = VALUES(tjlx),khbm = VALUES(khbm),khjgz = VALUES(khjgz),wlbm = VALUES(wlbm),dw = VALUES(dw),bz = VALUES(bz),djzk = VALUES(djzk),djbs = VALUES(djbs),
+    zkbs = VALUES(zkbs),yxksrq = VALUES(yxksrq),yxjsrq = VALUES(yxjsrq),wyj = VALUES(wyj),cjrq = VALUES(cjrq),wlms = VALUES(wlms),cjr = VALUES(cjr),sxzt = VALUES(sxzt)
+  </insert>
+  <update id="updateByExample" parameterType="map" >
+    update sap_price_tb
+    set id = #{record.id,jdbcType=VARCHAR},
+      xszz = #{record.xszz,jdbcType=VARCHAR},
+      fxqd = #{record.fxqd,jdbcType=VARCHAR},
+      tjlx = #{record.tjlx,jdbcType=VARCHAR},
+      khbm = #{record.khbm,jdbcType=VARCHAR},
+      khjgz = #{record.khjgz,jdbcType=VARCHAR},
+      wlbm = #{record.wlbm,jdbcType=VARCHAR},
+      dw = #{record.dw,jdbcType=VARCHAR},
+      bz = #{record.bz,jdbcType=VARCHAR},
+      djzk = #{record.djzk,jdbcType=VARCHAR},
+      djbs = #{record.djbs,jdbcType=VARCHAR},
+      zkbs = #{record.zkbs,jdbcType=VARCHAR},
+      ysksrq = #{record.ysksrq,jdbcType=VARCHAR},
+      ysjsrq = #{record.ysjsrq,jdbcType=VARCHAR},
+      wyj = #{record.wyj,jdbcType=VARCHAR},
+      tbzt = #{record.tbzt,jdbcType=VARCHAR},
+      cjrq = #{record.cjrq,jdbcType=VARCHAR},
+      sxzt = #{record.sxzt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jxszj.pojo.sap.SapPriceTb" >
+    update sap_price_tb
+    set xszz = #{xszz,jdbcType=VARCHAR},
+      fxqd = #{fxqd,jdbcType=VARCHAR},
+      tjlx = #{tjlx,jdbcType=VARCHAR},
+      khbm = #{khbm,jdbcType=VARCHAR},
+      khjgz = #{khjgz,jdbcType=VARCHAR},
+      wlbm = #{wlbm,jdbcType=VARCHAR},
+      dw = #{dw,jdbcType=VARCHAR},
+      bz = #{bz,jdbcType=VARCHAR},
+      djzk = #{djzk,jdbcType=VARCHAR},
+      djbs = #{djbs,jdbcType=VARCHAR},
+      zkbs = #{zkbs,jdbcType=VARCHAR},
+      yxksrq = #{yxksrq,jdbcType=VARCHAR},
+      yxjsrq = #{yxjsrq,jdbcType=VARCHAR},
+      wyj = #{wyj,jdbcType=VARCHAR},
+      tbzt = #{tbzt,jdbcType=VARCHAR},
+      cjrq = #{cjrq,jdbcType=VARCHAR},
+      sxzt = #{sxzt,jdbcType=VARCHAR},
+      cjr = #{cjr,jdbcType=VARCHAR},
+      wlms = #{wlms,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateTbzt">
+     update sap_price_tb
+      SET tbzt='已同步'
+       where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

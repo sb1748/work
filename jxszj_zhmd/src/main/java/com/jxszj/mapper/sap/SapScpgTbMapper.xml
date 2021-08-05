@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxszj.mapper.sap.SapScpgTbMapper" >
+  <resultMap id="BaseResultMap" type="com.jxszj.pojo.sap.SapScpgTb" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="ddh" property="ddh" jdbcType="VARCHAR" />
+    <result column="lsh" property="lsh" jdbcType="VARCHAR" />
+    <result column="pp" property="pp" jdbcType="VARCHAR" />
+    <result column="jhxdrq" property="jhxdrq" jdbcType="VARCHAR" />
+    <result column="sjxdrq" property="sjxdrq" jdbcType="VARCHAR" />
+    <result column="jhjhrq" property="jhjhrq" jdbcType="VARCHAR" />
+    <result column="xsdd" property="xsdd" jdbcType="VARCHAR" />
+    <result column="xsddh" property="xsddh" jdbcType="VARCHAR" />
+    <result column="jxsbm" property="jxsbm" jdbcType="VARCHAR" />
+    <result column="jxsmc" property="jxsmc" jdbcType="VARCHAR" />
+    <result column="wlzbm" property="wlzbm" jdbcType="VARCHAR" />
+    <result column="wlzmc" property="wlzmc" jdbcType="VARCHAR" />
+    <result column="wlbm" property="wlbm" jdbcType="VARCHAR" />
+    <result column="wlmc" property="wlmc" jdbcType="VARCHAR" />
+    <result column="cpmc" property="cpmc" jdbcType="VARCHAR" />
+    <result column="cpgg" property="cpgg" jdbcType="VARCHAR" />
+    <result column="psph" property="psph" jdbcType="VARCHAR" />
+    <result column="bz" property="bz" jdbcType="VARCHAR" />
+    <result column="sfbbjsc" property="sfbbjsc" jdbcType="VARCHAR" />
+    <result column="cjrq" property="cjrq" jdbcType="VARCHAR" />
+    <result column="dyzs" property="dyzs" jdbcType="INTEGER" />
+    <result column="tempname" property="tempname" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="barCode" property="barcode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, ddh, lsh, pp, jhxdrq, sjxdrq, jhjhrq, xsdd, xsddh, jxsbm, jxsmc, wlzbm, wlzmc, 
+    wlbm, wlmc, cpmc, cpgg, psph, bz, sfbbjsc, cjrq, dyzs, tempname, status, barCode
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jxszj.pojo.sap.SapScpgTbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sap_scpg_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <insert id="saveOrUpdate"  parameterType="java.util.List">
+    insert into sap_scpg_tb (id, ddh, lsh, 
+      pp, jhxdrq, sjxdrq, 
+      jhjhrq, xsdd, xsddh, 
+      jxsbm, jxsmc, wlzbm, 
+      wlzmc, wlbm, wlmc, 
+      cpmc, cpgg, psph, bz, 
+      sfbbjsc, cjrq, dyzs, 
+      tempname, status, barCode
+      )
+       values
+       <foreach collection="list" item="items" index="index" separator="," >
+	    (#{items.id,jdbcType=VARCHAR}, #{items.ddh,jdbcType=VARCHAR}, #{items.lsh,jdbcType=VARCHAR}, 
+	      #{items.pp,jdbcType=VARCHAR}, #{items.jhxdrq,jdbcType=VARCHAR}, #{items.sjxdrq,jdbcType=VARCHAR}, 
+	      #{items.jhjhrq,jdbcType=VARCHAR}, #{items.xsdd,jdbcType=VARCHAR}, #{items.xsddh,jdbcType=VARCHAR}, 
+	      #{items.jxsbm,jdbcType=VARCHAR}, #{items.jxsmc,jdbcType=VARCHAR}, #{items.wlzbm,jdbcType=VARCHAR}, 
+	      #{items.wlzmc,jdbcType=VARCHAR}, #{items.wlbm,jdbcType=VARCHAR}, #{items.wlmc,jdbcType=VARCHAR}, 
+	      #{items.cpmc,jdbcType=VARCHAR}, #{items.cpgg,jdbcType=VARCHAR}, #{items.psph,jdbcType=VARCHAR}, #{items.bz,jdbcType=VARCHAR}, 
+	      #{items.sfbbjsc,jdbcType=VARCHAR}, #{items.cjrq,jdbcType=VARCHAR}, #{items.dyzs,jdbcType=INTEGER}, 
+	      #{items.tempname,jdbcType=VARCHAR}, #{items.status,jdbcType=VARCHAR}, #{items.barcode,jdbcType=VARCHAR}
+	      )
+       </foreach>
+        ON DUPLICATE KEY UPDATE 
+	    ddh=values(ddh),lsh=values(lsh),pp=values(pp),jhxdrq=values(jhxdrq),sjxdrq=values(sjxdrq),jhjhrq=values(jhjhrq),xsdd=values(xsdd),xsddh=values(xsddh),
+	    jxsbm=values(jxsbm),jxsmc=values(jxsmc),wlzbm=values(wlzbm),wlzmc=values(wlzmc),wlbm=values(wlbm),wlmc=values(wlmc),cpmc=values(cpmc),cpgg=values(cpgg),
+	    psph=values(psph),bz=values(bz),sfbbjsc=values(sfbbjsc),cjrq=values(cjrq),dyzs=values(dyzs),tempname=values(tempname),status=values(status),
+	    barcode=values(barcode)
+    </insert>
+    
+</mapper>

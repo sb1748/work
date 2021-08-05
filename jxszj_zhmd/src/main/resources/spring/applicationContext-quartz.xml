@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/mvc  
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">  
+    
+    <!--使用MethodInvokingJobDetailFactoryBean，任务类可以不实现Job接口，通过targetMethod指定调用方法-->    
+	
+	<!-- SAP接口定时任务 -->
+	<!-- 交货进度 -->
+	<bean id="SapDeliverySendJdyDelivery" class="com.jxszj.quartz.SapDeliverySendJdyDeliveryQuartz"/>  
+    <bean id="SpringQtzJobMethodSapDeliverySendJdyDelivery" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+	    <property name="targetObject">  
+	        <ref bean="SapDeliverySendJdyDelivery"/>  
+	    </property>  
+	    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+	        <value>execute</value>  
+	    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanSapDeliverySendJdyDelivery" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodSapDeliverySendJdyDelivery"></property>  
+	    <property name="cronExpression" value="0 0 12,20 * * ?"></property>  
+	</bean>
+	
+	<!-- 供应商 -->
+	<bean id="SapGysToJdyGys" class="com.jxszj.quartz.SapGysToJdyGysQuartz"/>  
+    <bean id="SpringQtzJobMethodSapGysToJdyGys" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+	    <property name="targetObject">  
+	        <ref bean="SapGysToJdyGys"/>  
+	    </property>  
+	    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+	        <value>execute</value>  
+	    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanSapGysToJdyGys" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodSapGysToJdyGys"></property>  
+	    <property name="cronExpression" value="0 0 3 * * ?"></property>  
+	</bean>
+	
+	<!-- 出货分析 -->
+	<bean id="SapOrderListSendJdyChmx" class="com.jxszj.quartz.SapOrderListSendJdyChmxQuartz"/>  
+    <bean id="SpringQtzJobMethodSapOrderListSendJdyChmx" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+	    <property name="targetObject">  
+	        <ref bean="SapOrderListSendJdyChmx"/>  
+	    </property>  
+	    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+	        <value>execute</value>  
+	    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanSapOrderListSendJdyChmx" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodSapOrderListSendJdyChmx"></property>  
+	    <property name="cronExpression" value=" 0 0 */2 * * ?"></property>  
+	</bean>
+	
+	<!-- 信用额度 -->
+	<bean id="SapXySendJdyXy" class="com.jxszj.quartz.SapXySendJdyXyQuartz"/>  
+    <bean id="SpringQtzJobMethodSapXySendJdyXy" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+	    <property name="targetObject">  
+	        <ref bean="SapXySendJdyXy"/>  
+	    </property>  
+	    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+	        <value>execute</value>  
+	    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanSapXySendJdyXy" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodSapXySendJdyXy"></property>  
+	    <property name="cronExpression" value=" 0 0 */1 * * ?"></property>  
+	</bean>
+	
+	
+	<!-- 定时任务  生成临时密码-->  
+    <bean id="UserInfo" class="com.jxszj.quartz.UserInfoQuartz"/>  
+    <bean id="SpringQtzJobMethodUserInfo" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+    <property name="targetObject">  
+        <ref bean="UserInfo"/>  
+    </property>  
+    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+        <value>updatePwd</value>  
+    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanUserInfo" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodUserInfo"></property>  
+	    <property name="cronExpression" value="0 0 6 * * ?"></property>  
+	</bean>
+	
+	
+	<!-- 定时任务  移除已失效的价格-->  
+    <bean id="SapDelFailPrice" class="com.jxszj.quartz.SapDelFailPriceQuartz"/>  
+    <bean id="SpringQtzJobMethodSapDelFailPrice" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+    <property name="targetObject">  
+        <ref bean="SapDelFailPrice"/>  
+    </property>  
+    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+        <value>execute</value>  
+    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanSapDelFailPrice" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodSapDelFailPrice"></property>  
+	    <property name="cronExpression" value="0 0 4 * * ?"></property>  
+	</bean>
+	
+	
+	
+	<!-- 定时任务  将SAP中当天创建的价格和有效期至未昨天的价格同步到本地数据库，再同步到简道云-->  
+    <bean id="SapPriceSendJdyPriceQuarte" class="com.jxszj.quartz.SapPriceSendJdyPriceQuarte"/>  
+    <bean id="SpringQtzJobMethodPriceMoveQuartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+    <property name="targetObject">  
+        <ref bean="SapPriceSendJdyPriceQuarte"/>  
+    </property>  
+    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+        <value>execute</value>  
+    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanPriceMoveQuartz" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodPriceMoveQuartz"></property>  
+	    <property name="cronExpression" value="0 0 23 * * ?"></property>  
+	</bean>
+	
+	
+	<!-- 定时任务  生产订单明细-->  
+    <bean id="MesQrcodeQuartz" class="com.jxszj.quartz.MesQrcodeQuartz"/>  
+    <bean id="SpringQtzJobMethodMesQrcodeQuartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+    <property name="targetObject">  
+        <ref bean="MesQrcodeQuartz"/>  
+    </property>  
+    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+        <value>execute</value>  
+    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanMesQrcodeQuartz" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodMesQrcodeQuartz"></property>  
+	    <property name="cronExpression" value="0 50 23 * * ?"></property>  
+	</bean>
+	
+	<!-- 定时任务  城市冠军排行榜-->  
+    <bean id="CityChampionQuartz" class="com.jxszj.quartz.CityChampionQuartz"/>  
+    <bean id="SpringQtzJobMethodCityChampionQuartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+    <property name="targetObject">  
+        <ref bean="CityChampionQuartz"/>  
+    </property>  
+    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+        <value>execute</value>  
+    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanCityChampionQuartz" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodCityChampionQuartz"></property>  
+	    <property name="cronExpression" value="0 30 23 * * ?"></property>  
+	</bean>
+	
+	<!-- 定时任务  生产入库日报-->  
+    <bean id="ScrkwlQuartz" class="com.jxszj.quartz.ScrkwlQuartz"/>  
+    <bean id="SpringQtzJobMethodScrkwlQuartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+    <property name="targetObject">  
+        <ref bean="ScrkwlQuartz"/>  
+    </property>  
+    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+        <value>execute</value>  
+    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanScrkwlQuartz" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodScrkwlQuartz"></property>  
+	    <property name="cronExpression" value=" 0 0 23 * * ?"></property>  
+	</bean>
+	
+	
+	<!-- 定时任务  生产交货日报-->  
+    <bean id="ScjhwlQuartz" class="com.jxszj.quartz.ScjhwlQuartz"/>  
+    <bean id="SpringQtzJobMethodScjhwlQuartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+    <property name="targetObject">  
+        <ref bean="ScjhwlQuartz"/>  
+    </property>  
+    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+        <value>execute</value>  
+    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanScjhwlQuartz" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodScjhwlQuartz"></property>  
+	    <property name="cronExpression" value=" 0 2 23 * * ?"></property>  
+	</bean>
+	
+	
+	<!-- 定时任务  接单日报-->  
+    <bean id="JdrbQuartz" class="com.jxszj.quartz.JdrbQuartz"/>  
+    <bean id="SpringQtzJobMethodJdrbQuartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+    <property name="targetObject">  
+        <ref bean="JdrbQuartz"/>  
+    </property>  
+    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+        <value>execute</value>  
+    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanJdrbQuartz" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodJdrbQuartz"></property>  
+	    <property name="cronExpression" value=" 0 4 23 * * ?"></property>  
+	</bean>
+	
+	
+	
+	<!-- 定时任务  生产超期-->  
+    <bean id="SapSccqQuartz" class="com.jxszj.quartz.SapSccqQuartz"/>  
+    <bean id="SpringQtzJobMethodSapSccqQuartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+    <property name="targetObject">  
+        <ref bean="SapSccqQuartz"/>  
+    </property>  
+    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+        <value>execute</value>  
+    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanSapSccqQuartz" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodSapSccqQuartz"></property>  
+	    <property name="cronExpression" value=" 0 30 23 * * ?"></property>  
+	</bean>
+	
+	<!-- 定时任务 扫码报工中的工价更新-->  
+    <bean id="SmbgQuartz" class="com.jxszj.quartz.SmbgQuartz"/>  
+    <bean id="SpringQtzJobMethodSmbgQuartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+    <property name="targetObject">  
+        <ref bean="SmbgQuartz"/>  
+    </property>  
+    <property name="targetMethod">  <!-- 要执行的方法名称 -->  
+        <value>execute</value>  
+    </property>  
+	</bean> 
+	<!-- ======================== 调度触发器 ======================== -->  
+	<bean id="CronTriggerBeanSmbgQuartz" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethodSmbgQuartz"></property>  
+	    <property name="cronExpression" value=" 0 55 23 * * ?"></property>  
+	</bean>
+	
+	<!-- ======================== 调度工厂 ======================== -->  
+	<bean id="SpringJobSchedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+	    <property name="triggers">  
+	        <list>  
+				<!-- SAP --> 
+<!-- 				<ref bean="CronTriggerBeanSapDeliverySendJdyDelivery"/> -->
+<!-- 				<ref bean="CronTriggerBeanSapGysToJdyGys"/> -->
+<!-- 				<ref bean="CronTriggerBeanSapOrderListSendJdyChmx"/> -->
+<!-- 				<ref bean="CronTriggerBeanSapXySendJdyXy"/> -->
+<!-- 				<ref bean="CronTriggerBeanUserInfo"/> -->
+<!-- 				<ref bean="CronTriggerBeanSapDelFailPrice"/> -->
+<!-- 				<ref bean="CronTriggerBeanPriceMoveQuartz"/> -->
+<!-- 				<ref bean="CronTriggerBeanMesQrcodeQuartz"/> -->
+<!-- 				<ref bean="CronTriggerBeanCityChampionQuartz"/> -->
+<!-- 				<ref bean="CronTriggerBeanScrkwlQuartz"/> -->
+<!-- 				<ref bean="CronTriggerBeanScjhwlQuartz"/> -->
+<!-- 				<ref bean="CronTriggerBeanJdrbQuartz"/> -->
+<!-- 				<ref bean="CronTriggerBeanSapSccqQuartz"/> -->
+<!-- 				<ref bean="CronTriggerBeanSmbgQuartz"/> -->
+	        </list>  
+	    </property>  
+	</bean>  
+	
+</beans>

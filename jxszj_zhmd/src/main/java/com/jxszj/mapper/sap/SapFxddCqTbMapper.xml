@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxszj.mapper.sap.SapFxddCqTbMapper" >
+  <resultMap id="BaseResultMap" type="com.jxszj.pojo.sap.SapFxddCqTb" >
+    <result column="xspz" property="xspz" jdbcType="VARCHAR" />
+    <result column="cjrq" property="cjrq" jdbcType="VARCHAR" />
+    <result column="ydrq" property="ydrq" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    xspz, cjrq, ydrq
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jxszj.pojo.sap.SapFxddCqTbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sap_fxdd_cq_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByFxdd" resultMap="BaseResultMap" parameterType="java.util.List">
+    SELECT xspz, cjrq, ydrq FROM sap_fxdd_cq_tb WHERE xspz IN
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    GROUP BY xspz ORDER BY xspz DESC
+  </select>
+  <insert id="insert" parameterType="com.jxszj.pojo.sap.SapFxddCqTb" >
+    insert into sap_fxdd_cq_tb (xspz, cjrq, ydrq
+      )
+    values (#{xspz,jdbcType=VARCHAR}, #{cjrq,jdbcType=VARCHAR}, #{ydrq,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertByBatch" parameterType="java.util.List">
+   insert into sap_fxdd_cq_tb (xspz, cjrq, ydrq
+      )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+    	(#{item.xspz,jdbcType=VARCHAR}, #{item.cjrq,jdbcType=VARCHAR}, #{item.ydrq,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+  <update id="updateByExample" parameterType="map" >
+    update sap_fxdd_cq_tb
+    set xspz = #{record.xspz,jdbcType=VARCHAR},
+      cjrq = #{record.cjrq,jdbcType=VARCHAR},
+      ydrq = #{record.ydrq,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  	<update id="truncateTable">
+		truncate table sap_fxdd_cq_tb
+	</update>
+</mapper>

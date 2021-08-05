@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jxszj.mapper.sap.SapZjxshkTbMapper" >
+  <resultMap id="BaseResultMap" type="com.jxszj.pojo.sap.SapZjxshkTb" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pzbh" property="pzbh" jdbcType="VARCHAR" />
+    <result column="djbh" property="djbh" jdbcType="VARCHAR" />
+    <result column="jxsbm" property="jxsbm" jdbcType="VARCHAR" />
+    <result column="jxsmc" property="jxsmc" jdbcType="VARCHAR" />
+    <result column="zkrq" property="zkrq" jdbcType="VARCHAR" />
+    <result column="ddje" property="ddje" jdbcType="VARCHAR" />
+    <result column="skbz" property="skbz" jdbcType="VARCHAR" />
+    <result column="ysje" property="ysje" jdbcType="VARCHAR" />
+    <result column="fwf" property="fwf" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="msg" property="msg" jdbcType="VARCHAR" />
+    <result column="cjr" property="cjr" jdbcType="VARCHAR" />
+    <result column="jdybm" property="jdybm" jdbcType="VARCHAR" />
+    <result column="lrzx" property="lrzx" jdbcType="VARCHAR" />
+    <result column="sklx" property="sklx" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, pzbh, djbh, jxsbm, jxsmc, zkrq, ddje, skbz, ysje, fwf, status, msg, cjr, jdybm, 
+    lrzx, sklx
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jxszj.pojo.sap.SapZjxshkTbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sap_zjxshk_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jxszj.pojo.sap.SapZjxshkTbExample" >
+    delete from sap_zjxshk_tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jxszj.pojo.sap.SapZjxshkTb" >
+    insert into sap_zjxshk_tb (id, pzbh, djbh, 
+      jxsbm, jxsmc, zkrq, 
+      ddje, skbz, ysje, fwf, 
+      status, msg, cjr, jdybm, 
+      lrzx, sklx)
+    values (#{id,jdbcType=INTEGER}, #{pzbh,jdbcType=VARCHAR}, #{djbh,jdbcType=VARCHAR}, 
+      #{jxsbm,jdbcType=VARCHAR}, #{jxsmc,jdbcType=VARCHAR}, #{zkrq,jdbcType=VARCHAR}, 
+      #{ddje,jdbcType=VARCHAR}, #{skbz,jdbcType=VARCHAR}, #{ysje,jdbcType=VARCHAR}, #{fwf,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{msg,jdbcType=VARCHAR}, #{cjr,jdbcType=VARCHAR}, #{jdybm,jdbcType=VARCHAR}, 
+      #{lrzx,jdbcType=VARCHAR}, #{sklx,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertByBatch" parameterType="java.util.List">
+    insert into sap_zjxshk_tb (id, pzbh, djbh, 
+      jxsbm, jxsmc, zkrq, 
+      ddje, skbz, ysje, fwf, 
+      status, msg, cjr, jdybm, 
+      lrzx, sklx)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+		(#{item.id,jdbcType=INTEGER}, #{item.pzbh,jdbcType=VARCHAR}, #{item.djbh,jdbcType=VARCHAR}, 
+      #{item.jxsbm,jdbcType=VARCHAR}, #{item.jxsmc,jdbcType=VARCHAR}, #{item.zkrq,jdbcType=VARCHAR}, 
+      #{item.ddje,jdbcType=VARCHAR}, #{item.skbz,jdbcType=VARCHAR}, #{item.ysje,jdbcType=VARCHAR}, #{item.fwf,jdbcType=VARCHAR}, 
+      #{item.status,jdbcType=VARCHAR}, #{item.msg,jdbcType=VARCHAR}, #{item.cjr,jdbcType=VARCHAR}, #{item.jdybm,jdbcType=VARCHAR}, 
+      #{item.lrzx,jdbcType=VARCHAR}, #{item.sklx,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jxszj.pojo.sap.SapZjxshkTb" >
+    update sap_zjxshk_tb
+    set pzbh = #{pzbh,jdbcType=VARCHAR},
+      djbh = #{djbh,jdbcType=VARCHAR},
+      jxsbm = #{jxsbm,jdbcType=VARCHAR},
+      jxsmc = #{jxsmc,jdbcType=VARCHAR},
+      zkrq = #{zkrq,jdbcType=VARCHAR},
+      ddje = #{ddje,jdbcType=VARCHAR},
+      skbz = #{skbz,jdbcType=VARCHAR},
+      ysje = #{ysje,jdbcType=VARCHAR},
+      fwf = #{fwf,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      msg = #{msg,jdbcType=VARCHAR},
+      cjr = #{cjr,jdbcType=VARCHAR},
+      jdybm = #{jdybm,jdbcType=VARCHAR},
+      lrzx = #{lrzx,jdbcType=VARCHAR},
+      sklx = #{sklx,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
