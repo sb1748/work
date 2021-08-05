@@ -251,20 +251,20 @@
 	    <property name="triggers">  
 	        <list>  
 				<!-- SAP --> 
-<!-- 				<ref bean="CronTriggerBeanSapDeliverySendJdyDelivery"/> -->
-<!-- 				<ref bean="CronTriggerBeanSapGysToJdyGys"/> -->
-<!-- 				<ref bean="CronTriggerBeanSapOrderListSendJdyChmx"/> -->
-<!-- 				<ref bean="CronTriggerBeanSapXySendJdyXy"/> -->
-<!-- 				<ref bean="CronTriggerBeanUserInfo"/> -->
-<!-- 				<ref bean="CronTriggerBeanSapDelFailPrice"/> -->
-<!-- 				<ref bean="CronTriggerBeanPriceMoveQuartz"/> -->
-<!-- 				<ref bean="CronTriggerBeanMesQrcodeQuartz"/> -->
-<!-- 				<ref bean="CronTriggerBeanCityChampionQuartz"/> -->
-<!-- 				<ref bean="CronTriggerBeanScrkwlQuartz"/> -->
-<!-- 				<ref bean="CronTriggerBeanScjhwlQuartz"/> -->
-<!-- 				<ref bean="CronTriggerBeanJdrbQuartz"/> -->
-<!-- 				<ref bean="CronTriggerBeanSapSccqQuartz"/> -->
-<!-- 				<ref bean="CronTriggerBeanSmbgQuartz"/> -->
+				<ref bean="CronTriggerBeanSapDeliverySendJdyDelivery"/>
+				<ref bean="CronTriggerBeanSapGysToJdyGys"/>
+				<ref bean="CronTriggerBeanSapOrderListSendJdyChmx"/>
+				<ref bean="CronTriggerBeanSapXySendJdyXy"/>
+				<ref bean="CronTriggerBeanUserInfo"/>
+				<ref bean="CronTriggerBeanSapDelFailPrice"/>
+				<ref bean="CronTriggerBeanPriceMoveQuartz"/>
+				<ref bean="CronTriggerBeanMesQrcodeQuartz"/>
+				<ref bean="CronTriggerBeanCityChampionQuartz"/>
+				<ref bean="CronTriggerBeanScrkwlQuartz"/>
+				<ref bean="CronTriggerBeanScjhwlQuartz"/>
+				<ref bean="CronTriggerBeanJdrbQuartz"/>
+				<ref bean="CronTriggerBeanSapSccqQuartz"/>
+				<ref bean="CronTriggerBeanSmbgQuartz"/>
 	        </list>  
 	    </property>  
 	</bean>  
